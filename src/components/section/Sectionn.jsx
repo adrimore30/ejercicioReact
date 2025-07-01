@@ -1,11 +1,12 @@
 
 import './section.css';
-import ensalada from '../../assets/ensalada.png'
+import { useState, useEffect} from 'react'
+import {UserCard} from '../UserCard/UserCard'
+import  ensalada from '../../assets/ensalada.png'
 import vegetall from '../../assets/vegetal.png'
 import verdduras from '../../assets/verduras.png'
-//import { useState } from 'react';
 
-import {UserCard}from '../UserCard/UserCard'
+
 
 const users =[
   {
@@ -30,10 +31,28 @@ const users =[
   }
 ]
 export const Section = () => {
- // const [count, setCount]=useState(0)
-//  console.log(count)
+
+const [count, setCount]= useState(0)
+ //console.log('antes dek useEffect');
+ useEffect(()=>{
+   //console.log('useEffect ejecutandose');
+
+   fetch('https://dummyjson.com/users')
+   .then(res=>res.json())
+   .then(data=>console.log(data.users))
+   //console.log(resultado)
+ },[count])
+
+ const handleClick=()=>{
+  setCount(count + 1)
+ }
+ //console.log('despues del useEffect');
 
     return (
+
+<div>
+    <h2>{count}</h2>
+    <button onClick={handleClick}>Contador</button>
       <section>
         {
           users.map((user)=>{
@@ -43,6 +62,7 @@ export const Section = () => {
         })
       }
       </section>
+      </div>
     )
     }
 
