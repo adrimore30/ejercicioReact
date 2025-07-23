@@ -1,39 +1,28 @@
+import { useState, useEffect} from 'react'
+import {UserCard} from '../userCard/UserCard'
+import './Section.css';
 
-import './section.css';
-import ensalada from '../../assets/ensalada.png'
-import vegetall from '../../assets/vegetal.png'
-import verdduras from '../../assets/verduras.png'
-//import { useState } from 'react';
+export const Section= () => {
 
-import {UserCard}from '../UserCard/UserCard'
+const [users, setUsers]=useState([])
+ 
+ useEffect(()=>{
 
-const users =[
-  {
-    id:1,
-    name:'ensalada',
-    description:'Ensalada rica y nutritiva',
-    image:ensalada
-  },
-  {
-    id:2,
-    name:'vegetal',
-    description:'Come vegetales son muy nutritivos',
-    image:vegetall
 
-  },
-  {
-    id:3,
-    name:'verduras',
-    description:'No comas chatarra come bien',
-    image:verdduras
+   fetch('https://dummyjson.com/users')
+   .then(res=>res.json())
+   .then(data=>{
+        console.log(data.users),
+        setUsers(data.users)
+   })
+})
 
-  }
-]
-export const Section = () => {
- // const [count, setCount]=useState(0)
-//  console.log(count)
 
-    return (
+
+return (
+
+<div>
+    
       <section>
         {
           users.map((user)=>{
@@ -43,8 +32,10 @@ export const Section = () => {
         })
       }
       </section>
+      </div>
     )
-    }
+
+  }
 
   
 
